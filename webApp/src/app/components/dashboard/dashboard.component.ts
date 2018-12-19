@@ -65,6 +65,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   timerIncrementInterval: number;
   latestTimeElapsed;
   latestTimeElapsedToDisplay;
+  latestTimeFetched;
   counter = 0;
   refSerach: boolean = false;
   data: any;
@@ -319,9 +320,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
             this.getNodeLatency();
             this.getChartDataList();
             this._CommonService.sendCall('latest block called');
+            this.latestTimeFetched = this.changetoUTC(this.latestBlockData.currentTime);
           }
           this.latestTimeElapsed = this.latestBlockData.TimeElapsed;
           // //console.log("latestTimeElapsed", this.latestBlockData);
+          
           this.latestTimeElapsedToDisplay = this.changeTimeformat(this.latestTimeElapsed);
         },
           err => {
@@ -379,6 +382,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
       //   + this.twoDigit(hours) + ':' + this.twoDigit(minutes) + ':' + this.twoDigit(seconds) + ' hrs';
     }
     return finalTime;
+  }
+
+  changetoUTC(latestTime) {
+    let utcDate = new Date(latestTime*1000)
+    return utcDate.getUTCHours()+":"+utcDate.getUTCMinutes()+":"+utcDate.getUTCSeconds() 
+    //return (new Date(latestTime*1000)).toUTCString();
   }
 
   private twoDigit(num) {

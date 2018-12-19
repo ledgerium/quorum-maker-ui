@@ -6,12 +6,14 @@
                 <div class="rect-block-inner">
                     <h5>Current Block Number</h5>
                     <!-- <h3>{{latestBlockData?.latestBlockNumber}}</h3> -->
-                    <p class="block-number-size" [ngClass]="{'updated-block-number-size': (latestBlockData?.latestBlockNumber > 99999)}">
+                    <p class="block-number-size" style="margin-bottom: 0;" [ngClass]="{'updated-block-number-size': (latestBlockData?.latestBlockNumber > 99999)}" >
                         <ng2-odometer [number]="latestBlockData?.latestBlockNumber" [config]="{ auto: true }" [theme]="'default'" [format]="'(,ddd)'"></ng2-odometer>
                     </p>
                     <p [ngClass]="{'updated-margin': (latestBlockData?.latestBlockNumber > 99999)}">
-                        <strong>Last Block :</strong>
+                        <strong>Last Fetched:</strong>
                         <span>{{latestTimeElapsedToDisplay}} ago</span>
+                        <strong>Last Block Fetched:</strong>
+                        <span>{{latestTimeFetched}}</span>
                     </p>
                 </div>
             </div>
@@ -54,7 +56,7 @@
                         <span>{{getNodeInfoList?.connectionInfo?.port}} </span>
                         <strong>&nbsp;</strong>
                         <strong> IP Address:</strong>
-                        <span>{{getNodeInfoList?.connectionInfo?.ip}}</span>
+                        <span>{{getNodeInfoList?.connectionInfo?.externalIP}}</span>
                     </p>
                 </div>
             </div>
@@ -191,10 +193,11 @@
                         <th></th>
                         <th>Contract Address</th>
                         <th>Contract Name</th>
-                        <th><a (click)="OrderByType = !OrderByType"> Deployment Date <span class="icon-sort" [ngClass]="{'icon-sort-rotate': OrderByType}">&nbsp;</span></a></th>
+                        <th><a (click)="OrderByType = !OrderByType"> Deployed Date <span class="icon-sort" [ngClass]="{'icon-sort-rotate': OrderByType}">&nbsp;</span></a></th>
                         <th>Sender</th>
                         <th>Contract Type</th>
-                        <th>Description</th>
+                        <th>Tx Hash</th>
+                        <!-- <th>Description</th> -->
                         <th>ABI</th>
                     </tr>
                 </thead>
@@ -212,7 +215,10 @@
                             <div class="eclipse-text">{{item?.sender || '--'}}</div>
                         </td>
                         <td [ngClass]="checkType(item.contractType)">{{item?.contractType || '--'}}</td>
-                        <td title="{{item?.description}}">{{item?.description || '--'}}</td>
+                        <td title="{{item?.transactionHash}}">
+                            <div class="eclipse-text">{{item?.transactionHash || '--'}}</div>
+                        </td>
+                        <!-- <td title="{{item?.description}}">{{item?.description || '--'}}</td> -->
                         <td title="{{item?.abi}}">
                             <code *ngIf="item?.abi != ''" class="eclipse-text">{{item?.abi || '--'}}</code>
                             <a *ngIf="item?.abi == ''" href="javascript:void(0)" (click)="uploadABIModal(item,false)" class="btn btn-success">Upload ABI</a>

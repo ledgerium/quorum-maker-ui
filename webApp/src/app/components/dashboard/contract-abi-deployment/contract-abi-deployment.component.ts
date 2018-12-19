@@ -37,7 +37,8 @@ export class ContractAbiDeploymentComponent implements OnInit {
       selectFile: ['', Validators.required],
       name: [this.contractAbi.contractName || ''],
       address: [this.contractAbi.contractAddress || ''],
-      description: [this.contractAbi.description || '']
+      description: [this.contractAbi.description || ''],
+      transactionHash: [this.contractAbi.transactionHash || '']
     });
   }
 
@@ -49,6 +50,7 @@ export class ContractAbiDeploymentComponent implements OnInit {
     input.append('description', String(data.description));
     input.append("abi", this.filesToUpload); // naming file name as file1,2,3 ...
     //input.append('private', String(this.isNetworkSelected));
+    input.append('transactionHash',String(data.transactionHash));
     return input;
   }
 

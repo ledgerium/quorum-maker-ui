@@ -24,9 +24,13 @@
                         <label>Sender</label>
                         <input name="address" [readonly]="contractFlag" type="text" value="{{contractAbi?.sender}}" class="form-control">
                     </div>
-                    <div class="col-md-12 form-group">
+                    <div class="col-md-6 form-group">
                         <label>Description</label>
                         <input name="description" type="text" [readonly]="contractFlag" id="description" formControlName="description" class="form-control">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Transaction Hash</label>
+                        <input name="transactionHash" type="text" [readonly]="contractFlag" id="transactionHash" formControlName="transactionHash" class="form-control">
                     </div>
                     <div class="col-md-12 form-group" *ngIf="!contractFlag">
                         <label>Choose ABI File</label>
