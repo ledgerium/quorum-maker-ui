@@ -386,7 +386,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   changetoUTC(latestTime) {
     let utcDate = new Date(latestTime*1000)
-    return utcDate.getUTCHours()+":"+utcDate.getUTCMinutes()+":"+utcDate.getUTCSeconds() 
+    var hourPrefix = "", minutePrefix = "";
+    if(utcDate.getUTCHours()<10)
+      hourPrefix = "0"
+    if(utcDate.getUTCMinutes()<10)
+      minutePrefix = "0"
+    return hourPrefix+utcDate.getUTCHours()+":"+minutePrefix+utcDate.getUTCMinutes()+":"+utcDate.getUTCSeconds() 
     //return (new Date(latestTime*1000)).toUTCString();
   }
 
