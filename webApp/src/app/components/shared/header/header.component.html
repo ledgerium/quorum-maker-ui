@@ -3,7 +3,7 @@
 <div class="container-fluid header">
   <div class="navbar-header">
     <a class="navbar-brand logo">
-      <img src="/assets/images/quorum-maker.svg">
+      <img src="/assets/images/ledgerium-logo.svg">
     </a>
     <span>{{getNodeInfoList?.nodeName}}</span>
     <em *ngIf="getNodeInfoList">{{getNodeInfoList?.active}}</em>
@@ -25,9 +25,6 @@
       </li>
       <li class="compile-deploy">
         <a href="javascript:void(0)" (click)="displayAccounts()">Accounts</a>
-      </li>
-      <li class="compile-deploy">
-        <a href="javascript:void(0)" (click)="displayWhitelists()">Whitelist</a>
       </li>
       <li class="dropdown dropdown-click" *ngIf="pendingRequest?.length > 0">
         <img src="/assets/images/crossroad.png" (click)="toggle()">
